@@ -1,0 +1,12 @@
+{
+  "name": "SemDude",
+  "private": true,
+  "version": "1.0.0",
+  "author": "SemDude",
+  "description": "A Sem Hack Tool",
+  "dependencies": {
+    "@openui5/sap.m": "^1",
+    "@openui5/sap.ui.core": "^1",
+    "@openui5/themelib_sap_fiori_3": "^1"
+  }
+}

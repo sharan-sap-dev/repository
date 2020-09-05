@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified">
+	<Dialog id="idUpload" title="Upload Sheet" titleAlignment="Center">
+		<content>
+			<VBox  class="sapUiMediumMargin" alignItems="Center">
+				<u:FileUploader id="idfileUploader"  multiple="true" fileType="xls,xlsx,csv" uploadProgress="onUploadProgress" iconOnly="true" icon="sap-icon://upload-to-cloud"/>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button text="Load" press="onUpload" type="Emphasized"></Button>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" type="Transparent" press="onUploadDialogClose"></Button>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

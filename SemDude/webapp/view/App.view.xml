@@ -1,0 +1,57 @@
+<mvc:View controllerName="com.hack.SemDude.controller.App"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true">
+	<App>
+		<pages>
+			<Page>
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://sys-enter-2" type="transparent" press="onStatus"></Button>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="{i18n>homePageTitle}"></Title>
+						</contentMiddle>
+						<contentRight>
+							<Button icon="sap-icon://excel-attachment" type="transparent" press="onUploadDialogOpen"></Button>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<Toolbar>
+						<SearchField id="idSearchField" placeholder="Search" showRefreshButton="true" liveChange=".onSearch" width="100%"/>
+						<ToggleButton icon="sap-icon://microphone" pressed="false" press="onVoiceRecog"/>
+					</Toolbar>
+					<Table id="idDataTable" autoPopinMode="true" inset="false" items="{ path: '/Data', sorter: { path: 'Questions' } }">
+						<columns>
+							<Column width="12em">
+								<Text text="Question"/>
+							</Column>
+							<Column hAlign="End" demandPopin="true">
+								<Text text="Answer"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{SupplierName}"/>
+									<Text text="{Width} x {Depth} x {Height} {DimUnit}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+				<footer>
+					<Toolbar height="40%">
+						<form:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="true">
+							<Label text="Console Log"/>
+							<TextArea id="idStatusLog" value="" editable="false" rows="4" width="100%"/>
+						</form:SimpleForm>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
