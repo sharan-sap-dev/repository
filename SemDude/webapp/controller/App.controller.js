@@ -5,14 +5,24 @@ jQuery.sap.require("com/hack/SemDude/Utility/XlsLib"),
 		"sap/m/MessageToast",
 		"sap/ui/core/Fragment",
 		"sap/ui/core/BusyIndicator",
-		"sap/m/MessageBox"
-	], function (Controller, MessageToast, Fragment,BusyIndicator,MessageBox) {
+		"sap/m/MessageBox",
+		"sap/base/Log"
+
+	], function (Controller, MessageToast, Fragment,BusyIndicator,MessageBox,Log) {
 		"use strict";
 
 		return Controller.extend("com.hack.SemDude.controller.App", {
 
 			onInit: function () {
 				var that = this;
+
+				this.getSplitAppObj().setHomeIcon({
+					'phone': 'phone-icon.png',
+					'tablet': 'tablet-icon.png',
+					'icon': 'desktop.ico'
+				});
+
+				//Speech Rec
 				if ('webkitSpeechRecognition' in window) {
 					this.recognition = new webkitSpeechRecognition();
 				} else {
@@ -48,13 +58,43 @@ jQuery.sap.require("com/hack/SemDude/Utility/XlsLib"),
 					}
 				};
 				
-				MessageBox.information("Under Development",{
-					title: "Notice",                                
-					onClose: function(){
-						BusyIndicator.show();
-					},                              
-					actions: sap.m.MessageBox.Action.OK   
-				});
+				// MessageBox.information("Under Development",{
+				// 	title: "Notice",                                
+				// 	onClose: function(){
+				// 		BusyIndicator.show();
+				// 	},                              
+				// 	actions: sap.m.MessageBox.Action.OK   
+				// });
+			},
+		
+			onPressNavToDetail: function () {
+				this.getSplitAppObj().to(this.createId("detailDetail"));
+			},
+	
+			onPressDetailBack: function () {
+				this.getSplitAppObj().backDetail();
+			},
+	
+			onPressMasterBack: function () {
+				this.getSplitAppObj().backMaster();
+			},
+	
+			onPressGoToMaster: function () {
+				this.getSplitAppObj().toMaster(this.createId("master2"));
+			},
+	
+			onListItemPress: function (oEvent) {
+				var sToPageId = oEvent.getParameter("listItem").getCustomData()[0].getValue();
+	
+				this.getSplitAppObj().toDetail(this.createId(sToPageId));
+			},
+	
+			getSplitAppObj: function () {
+				var result = this.byId("SplitAppDemo");
+				if (!result) {
+					Log.info("SplitApp object can't be found");
+				}
+				return result;
 			},
 			onVoiceRecog: function (oEvent) {
 				if (oEvent.getSource().getPressed()) {
