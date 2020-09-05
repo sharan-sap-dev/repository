@@ -5,24 +5,14 @@ jQuery.sap.require("com/hack/SemDude/Utility/XlsLib"),
 		"sap/m/MessageToast",
 		"sap/ui/core/Fragment",
 		"sap/ui/core/BusyIndicator",
-		"sap/m/MessageBox",
-		"sap/base/Log"
-
-	], function (Controller, MessageToast, Fragment,BusyIndicator,MessageBox,Log) {
+		"sap/m/MessageBox"
+	], function (Controller, MessageToast, Fragment,BusyIndicator,MessageBox) {
 		"use strict";
 
 		return Controller.extend("com.hack.SemDude.controller.App", {
 
 			onInit: function () {
 				var that = this;
-
-				this.getSplitAppObj().setHomeIcon({
-					'phone': 'phone-icon.png',
-					'tablet': 'tablet-icon.png',
-					'icon': 'desktop.ico'
-				});
-
-				//Speech Rec
 				if ('webkitSpeechRecognition' in window) {
 					this.recognition = new webkitSpeechRecognition();
 				} else {
@@ -66,39 +56,9 @@ jQuery.sap.require("com/hack/SemDude/Utility/XlsLib"),
 				// 	actions: sap.m.MessageBox.Action.OK   
 				// });
 			},
-			handleNavButtonPress: function () {
-				var oSplitApp = this.getView().getParent().getParent();
-				var oMaster = oSplitApp.getMasterPages()[0];
-				oSplitApp.toMaster(oMaster, "flip");
-			},
-			onPressNavToDetail: function () {
-				this.getSplitAppObj().to(this.createId("detailDetail"));
-			},
-	
-			onPressDetailBack: function () {
-				this.getSplitAppObj().backDetail();
-			},
-	
-			onPressMasterBack: function () {
-				this.getSplitAppObj().backMaster();
-			},
-	
-			onPressGoToMaster: function () {
-				this.getSplitAppObj().toMaster(this.createId("master2"));
-			},
-	
-			onListItemPress: function (oEvent) {
-				var sToPageId = oEvent.getParameter("listItem").getCustomData()[0].getValue();
-	
-				this.getSplitAppObj().toDetail(this.createId(sToPageId));
-			},
-	
-			getSplitAppObj: function () {
-				var result = this.byId("SplitAppDemo");
-				if (!result) {
-					Log.info("SplitApp object can't be found");
-				}
-				return result;
+			handleToggleSecondaryContent: function(oEvent) {
+				var oSplitContainer = this.byId("mySplitContainer");
+				oSplitContainer.setShowSecondaryContent(!oSplitContainer.getShowSecondaryContent());
 			},
 			onVoiceRecog: function (oEvent) {
 				if (oEvent.getSource().getPressed()) {

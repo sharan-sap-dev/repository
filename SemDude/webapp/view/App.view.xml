@@ -2,30 +2,33 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
 	xmlns:form="sap.ui.layout.form"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" displayBlock="true">
-		<SplitApp
-		id="SplitAppDemo"
-		initialDetail="detail"
-		initialMaster="master"
-		orientationChange=".onOrientationChange">
-		<detailPages>
-			<Page
-				id="home"
-				title="Home"
-				backgroundDesign= "Solid"
-				class="sapUiStdPage"
-				showNavButton="{device>/isPhone}" navButtonPress="handleNavButtonPress">
+		xmlns:u="sap.ui.unified"
+
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true">
+	<u:SplitContainer
+			id="mySplitContainer"
+			showSecondaryContent="true"
+			secondaryContentWidth="75px">
+			<u:secondaryContent>
+				<List>
+					<StandardListItem icon="sap-icon://sys-enter-2" press=".onPressGoToMaster" />
+					<StandardListItem icon="sap-icon://sys-enter-2" press=".onPressGoToMaster" />
+					<StandardListItem icon="sap-icon://sys-enter-2" press=".onPressGoToMaster" />
+					<StandardListItem icon="sap-icon://sys-enter-2" press=".onPressGoToMaster" />
+				</List>
+			</u:secondaryContent>
+			<u:content>
+				<Page>
 				<customHeader>
 					<Bar>
 						<contentLeft>
-							<Button icon="sap-icon://sys-enter-2" type="transparent" press="onStatus"></Button>
+							<Button icon="sap-icon://sys-enter-2"  press="handleToggleSecondaryContent"></Button>
 						</contentLeft>
 						<contentMiddle>
 							<Title text="{i18n>homePageTitle}"></Title>
 						</contentMiddle>
 						<contentRight>
-							<Button icon="sap-icon://excel-attachment" type="transparent" press="onUploadDialogOpen"></Button>
+							<Button icon="sap-icon://excel-attachment"  press="onUploadDialogOpen"></Button>
 						</contentRight>
 					</Bar>
 				</customHeader>
@@ -62,44 +65,11 @@
 					</Toolbar>
 				</footer>
 			</Page>
-			<Page
-				id="howToUse"
-				title="How To Use"
-				class="sapUiStdPage"
-				>
-				
-			</Page>
-			<Page
-				id="aboutUs"
-				title="About Us"
-				backgroundDesign= "Solid"
-				class="sapUiStdPage"
-				>
-				
-			</Page>
-		</detailPages>
-		<masterPages>
-			<Page
-				id="master"
-				title="Menu"
-				textAlign="Center"
-				backgroundDesign= "List"
-				icon="sap-icon://action"
-				class="sapUiStdPage">
-				<List itemPress=".onListItemPress">
-					<items>
-						<StandardListItem title="Home" type="Active" custom:to="home" />
-						<StandardListItem title="How to use" type="Active" custom:to="howToUse" />
-						<StandardListItem title="About Us" type="Active" custom:to="aboutUs" />
-					</items>
-				</List>
-				<footer>
-				<Toolbar>
-				<Label class="sapUiSmallMarginBegin" text="v0.02"/>
-				</Toolbar>
-				</footer>
-			</Page>
-
-		</masterPages>
-	</SplitApp>
+			</u:content>
+		</u:SplitContainer>
+	<App>
+		<pages>
+			
+		</pages>
+	</App>
 </mvc:View>
