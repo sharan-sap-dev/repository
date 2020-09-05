@@ -14,7 +14,8 @@
 				id="home"
 				title="Home"
 				backgroundDesign= "Solid"
-				class="sapUiStdPage">
+				class="sapUiStdPage"
+				showNavButton="{device>/isPhone}" navButtonPress="handleNavButtonPress">
 				<customHeader>
 					<Bar>
 						<contentLeft>

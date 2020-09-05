@@ -20,6 +20,10 @@ sap.ui.define([
 					name : "World"
 				}
 			};
+			var deviceModel = new sap.ui.model.json.JSONModel({
+				isPhone: sap.ui.Device.system.phone
+			});
+			this.setModel(deviceModel, "device");
 			var oModel = new JSONModel(oData);
 			this.setModel(oModel);
 		}

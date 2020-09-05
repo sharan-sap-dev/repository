@@ -66,7 +66,11 @@ jQuery.sap.require("com/hack/SemDude/Utility/XlsLib"),
 				// 	actions: sap.m.MessageBox.Action.OK   
 				// });
 			},
-		
+			handleNavButtonPress: function () {
+				var oSplitApp = this.getView().getParent().getParent();
+				var oMaster = oSplitApp.getMasterPages()[0];
+				oSplitApp.toMaster(oMaster, "flip");
+			},
 			onPressNavToDetail: function () {
 				this.getSplitAppObj().to(this.createId("detailDetail"));
 			},
