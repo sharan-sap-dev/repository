@@ -4,8 +4,9 @@ jQuery.sap.require("com/hack/SemDude/Utility/XlsLib"),
 		"sap/ui/core/mvc/Controller",
 		"sap/m/MessageToast",
 		"sap/ui/core/Fragment",
-		"sap/ui/core/HTML"
-	], function (Controller, MessageToast, Fragment,HTML) {
+		"sap/ui/core/BusyIndicator",
+		"sap/m/MessageBox"
+	], function (Controller, MessageToast, Fragment,BusyIndicator,MessageBox) {
 		"use strict";
 
 		return Controller.extend("com.hack.SemDude.controller.App", {
@@ -46,6 +47,16 @@ jQuery.sap.require("com/hack/SemDude/Utility/XlsLib"),
 						that.byId("idSearchField").setValue(vFinal);
 					}
 				};
+				BusyIndicator.show();
+				MessageBox.information("Under Development",{
+					title: "Notice",                                // default
+					onClose: null,                                       // default
+					styleClass: "",                                      // default
+					actions: sap.m.MessageBox.Action.OK,                 // default
+					emphasizedAction: sap.m.MessageBox.Action.OK,        // default
+					initialFocus: null,                                  // default
+					textDirection: sap.ui.core.TextDirection.Inherit     // default
+				});
 			},
 			onVoiceRecog: function (oEvent) {
 				if (oEvent.getSource().getPressed()) {
