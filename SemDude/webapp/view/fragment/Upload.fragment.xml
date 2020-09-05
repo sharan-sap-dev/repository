@@ -5,7 +5,7 @@
 				<u:FileUploader id="idfileUploader"  multiple="true" fileType="xls,xlsx,csv" uploadProgress="onUploadProgress" iconOnly="true" icon="sap-icon://upload-to-cloud"/>
 			</VBox>
 		</content>
-		<beginButton>
+		<beginButton> 
 			<Button text="Load" press="onUpload" type="Emphasized"></Button>
 		</beginButton>
 		<endButton>
