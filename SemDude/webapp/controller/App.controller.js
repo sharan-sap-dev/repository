@@ -47,15 +47,13 @@ jQuery.sap.require("com/hack/SemDude/Utility/XlsLib"),
 						that.byId("idSearchField").setValue(vFinal);
 					}
 				};
-				BusyIndicator.show();
+				
 				MessageBox.information("Under Development",{
-					title: "Notice",                                // default
-					onClose: null,                                       // default
-					styleClass: "",                                      // default
-					actions: sap.m.MessageBox.Action.OK,                 // default
-					emphasizedAction: sap.m.MessageBox.Action.OK,        // default
-					initialFocus: null,                                  // default
-					textDirection: sap.ui.core.TextDirection.Inherit     // default
+					title: "Notice",                                
+					onClose: function(){
+						BusyIndicator.show();
+					},                              
+					actions: sap.m.MessageBox.Action.OK   
 				});
 			},
 			onVoiceRecog: function (oEvent) {
