@@ -2,10 +2,19 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
 	xmlns:form="sap.ui.layout.form"
-	xmlns:mvc="sap.ui.core.mvc" displayBlock="true">
-	<App>
-		<pages>
-			<Page>
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" displayBlock="true">
+		<SplitApp
+		id="SplitAppDemo"
+		initialDetail="detail"
+		initialMaster="master"
+		orientationChange=".onOrientationChange">
+		<detailPages>
+			<Page
+				id="home"
+				title="Home"
+				backgroundDesign= "Solid"
+				class="sapUiStdPage">
 				<customHeader>
 					<Bar>
 						<contentLeft>
@@ -52,6 +61,44 @@
 					</Toolbar>
 				</footer>
 			</Page>
-		</pages>
-	</App>
+			<Page
+				id="howToUse"
+				title="How To Use"
+				class="sapUiStdPage"
+				>
+				
+			</Page>
+			<Page
+				id="aboutUs"
+				title="About Us"
+				backgroundDesign= "Solid"
+				class="sapUiStdPage"
+				>
+				
+			</Page>
+		</detailPages>
+		<masterPages>
+			<Page
+				id="master"
+				title="Menu"
+				textAlign="Center"
+				backgroundDesign= "List"
+				icon="sap-icon://action"
+				class="sapUiStdPage">
+				<List itemPress=".onListItemPress">
+					<items>
+						<StandardListItem title="Home" type="Active" custom:to="home" />
+						<StandardListItem title="How to use" type="Active" custom:to="howToUse" />
+						<StandardListItem title="About Us" type="Active" custom:to="aboutUs" />
+					</items>
+				</List>
+				<footer>
+				<Toolbar>
+				<Label class="sapUiSmallMarginBegin" text="v0.02"/>
+				</Toolbar>
+				</footer>
+			</Page>
+
+		</masterPages>
+	</SplitApp>
 </mvc:View>
