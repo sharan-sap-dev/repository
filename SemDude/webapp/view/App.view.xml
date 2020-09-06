@@ -3,6 +3,7 @@
 	xmlns:core="sap.ui.core"
 	xmlns:form="sap.ui.layout.form"
 	xmlns:u="sap.ui.unified"
+	xmlns:l="sap.ui.layout"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:tnt="sap.tnt" displayBlock="true" height="100%">
 	<tnt:ToolPage id="toolPage">
@@ -14,86 +15,115 @@
 					</layoutData>
 				</Button>
 				<HBox width="100%" alignContent="Center" justifyContent="Center">
-					<Title text="Sem Dude">
+					<Title text="Dude's Sem">
 					</Title>
 				</HBox>
-				<Button icon="sap-icon://synchronize" type="Transparent" press="onHardReload">
+				<ToggleButton icon="sap-icon://microphone" pressed="false" press="onVoiceRecog">
 					<layoutData>
 						<OverflowToolbarLayoutData priority="NeverOverflow" />
 					</layoutData>
-				</Button>
+				</ToggleButton>
 			</tnt:ToolHeader>
 		</tnt:header>
 		<tnt:sideContent>
 			<tnt:SideNavigation id="sideNavigation" itemSelect=".onItemSelect" selectedKey="idPageWorkspace">
 				<tnt:NavigationList>
-					<tnt:NavigationListItem text="Workspace" key="idPageWorkspace" icon="sap-icon://overlay"/>
+					<tnt:NavigationListItem text="Workspace" key="idPageWorkspace" icon="sap-icon://laptop"/>
 					<tnt:NavigationListItem text="Upload Source" key="idPageUpload" icon="sap-icon://excel-attachment" />
-					<tnt:NavigationListItem text="How to use" key="idPageHowTo" icon="sap-icon://sys-help-2" />
+					<tnt:NavigationListItem text="Voice Recognition" key="idPageVoiceRecognition" icon="sap-icon://bo-strategy-management" />
+					<tnt:NavigationListItem text="How to use" key="idPageHowTo" icon="sap-icon://sys-help" />
 					<tnt:NavigationListItem text="Settings" key="idPageSettings" icon="sap-icon://developer-settings" />
 					<tnt:NavigationListItem text="About" key="idPageAbout" icon="sap-icon://message-information" />
 				</tnt:NavigationList>
 			</tnt:SideNavigation>
 		</tnt:sideContent>
 		<tnt:mainContents>
-			<NavContainer id="pageContainer" initialPage="idPageWorkspace">
-				<pages>
-					<Page showHeader="false" id="idPageWorkspace" title="Workspace" titleAlignment="Center">
-						<content>
-							<Toolbar>
-								<SearchField id="idSearchField" placeholder="Search" showRefreshButton="true" liveChange=".onSearch" width="100%"/>
-								<ToggleButton icon="sap-icon://microphone" pressed="false" press="onVoiceRecog"/>
-							</Toolbar>
-							<Table id="idDataTable" autoPopinMode="true" inset="false" items="{ path: '/Data', sorter: { path: 'Questions' } }">
-								<columns>
-									<Column width="12em">
-										<Text text="Question"/>
-									</Column>
-									<Column hAlign="End" demandPopin="true">
-										<Text text="Answer"/>
-									</Column>
-								</columns>
-								<items>
-									<ColumnListItem>
-										<cells>
-											<Text text="{SupplierName}"/>
-											<Text text="{Width} x {Depth} x {Height} {DimUnit}"/>
-										</cells>
-									</ColumnListItem>
-								</items>
-							</Table>
-						</content>
-						<footer>
-							<Toolbar height="40%">
-								<form:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="true">
-									<Label text="Console Log"/>
-									<TextArea id="idStatusLog" value="" editable="false" rows="4" width="100%"/>
-								</form:SimpleForm>
-							</Toolbar>
-						</footer>
-					</Page>
-					<Page showHeader="false" id="idPageUpload" title="Upload" titleAlignment="Center">
-						<content>
-							<Text text="Upload"/>
-						</content>
-					</Page>
-					<Page showHeader="false" id="idPageHowTo" title="How To Use" titleAlignment="Center">
-						<content>
-							<Text text="How To Use"/>
-						</content>
-					</Page>
-					<Page showHeader="false" id="idPageSettings" title="Settings" titleAlignment="Center">
-						<content>
-							<Text text="Settings"/>
-						</content>
-					</Page>
-					<Page showHeader="false" id="idPageAbout" title="About" titleAlignment="Center">
-						<content>
-							<Text text="About"/>
-						</content>
-					</Page>
-				</pages>
-			</NavContainer>
+			<Page showHeader="false">
+				<content>
+					<NavContainer id="pageContainer" initialPage="idPageWorkspace">
+						<pages>
+							<Page showHeader="false" id="idPageWorkspace" title="Workspace" titleAlignment="Center">
+								<content>
+									<Toolbar>
+										<SearchField id="idSearchField" placeholder="Search" showRefreshButton="true" liveChange=".onSearch" width="100%"/>
+									</Toolbar>
+									<Table id="idDataTable" autoPopinMode="true" inset="false" items="{ path: '/Data', sorter: { path: 'Questions' } }">
+										<columns>
+											<Column width="12em">
+												<Text text="Question"/>
+											</Column>
+											<Column hAlign="End" demandPopin="true">
+												<Text text="Answer"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem>
+												<cells>
+													<Text text="{SupplierName}"/>
+													<Text text="{Width} x {Depth} x {Height} {DimUnit}"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</content>
+							</Page>
+							<Page showHeader="false" id="idPageUpload" title="Upload" titleAlignment="Center">
+								<content>
+									<VBox alignContent="Center" justifyContent="Center" height="80%" width="100%">
+										<HBox alignContent="Center" justifyContent="Center">
+											<u:FileUploader id="idfileUploader" multiple="true" fileType="xls,xlsx,csv" uploadProgress="onUploadProgress" iconOnly="true" icon="sap-icon://upload-to-cloud"/>
+										</HBox>
+									</VBox>
+								</content>
+							</Page>
+							<Page showHeader="false" id="idPageVoiceRecognition" title="Voice Recognition" titleAlignment="Center">
+								<content>
+									<VBox alignContent="Center" justifyContent="Center" height="80%" width="100%">
+										<HBox alignContent="Center" justifyContent="Center">
+											<Label text="Under Development ..."/>
+										</HBox>
+									</VBox>
+								</content>
+							</Page>
+							<Page showHeader="false" id="idPageHowTo" title="How To Use" titleAlignment="Center">
+								<content>
+									<VBox alignContent="Center" justifyContent="Center" height="80%" width="100%">
+										<HBox alignContent="Center" justifyContent="Center">
+											<Label text="Under Development ..."/>
+										</HBox>
+									</VBox>
+								</content>
+							</Page>
+							<Page showHeader="false" id="idPageSettings" title="Settings" titleAlignment="Center">
+								<content>
+									<VBox alignContent="Center" justifyContent="Center" height="80%" width="100%">
+										<HBox alignContent="Center" justifyContent="Center">
+											<Label text="Under Development ..."/>
+										</HBox>
+									</VBox>
+								</content>
+							</Page>
+							<Page showHeader="false" id="idPageAbout" title="About" titleAlignment="Center">
+								<content>
+									<VBox alignContent="Center" justifyContent="Center" height="80%" width="100%">
+										<HBox alignContent="Center" justifyContent="Center">
+											<Label text="Under Development ..."/>
+										</HBox>
+									</VBox>
+								</content>
+							</Page>
+						</pages>
+					</NavContainer>
+				</content>
+				<footer>
+					<Toolbar height="40%">
+						<form:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="true">
+							<Label text="Console"/>
+							<TextArea id="idStatusLog" value="" editable="false" rows="4" width="100%"/>
+						</form:SimpleForm>
+					</Toolbar>
+				</footer>
+			</Page>
 		</tnt:mainContents>
 	</tnt:ToolPage>
 </mvc:View>
