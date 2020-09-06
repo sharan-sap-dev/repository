@@ -56,9 +56,17 @@ jQuery.sap.require("com/hack/SemDude/Utility/XlsLib"),
 				// 	actions: sap.m.MessageBox.Action.OK   
 				// });
 			},
-			handleToggleSecondaryContent: function(oEvent) {
-				var oSplitContainer = this.byId("mySplitContainer");
-				oSplitContainer.setShowSecondaryContent(!oSplitContainer.getShowSecondaryContent());
+			onSideNavButtonPress: function () {
+				var oToolPage = this.byId("toolPage");
+				var bSideExpanded = oToolPage.getSideExpanded();
+				oToolPage.setSideExpanded(!oToolPage.getSideExpanded());
+			},
+			onHardReload: function(){
+				window.location.reload();
+			},
+			onItemSelect: function (oEvent) {
+				var oItem = oEvent.getParameter("item");
+				this.byId("pageContainer").to(this.getView().createId(oItem.getKey()));
 			},
 			onVoiceRecog: function (oEvent) {
 				if (oEvent.getSource().getPressed()) {

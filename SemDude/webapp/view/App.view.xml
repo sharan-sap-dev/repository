@@ -3,93 +3,97 @@
 	xmlns:core="sap.ui.core"
 	xmlns:form="sap.ui.layout.form"
 	xmlns:u="sap.ui.unified"
-	xmlns:mvc="sap.ui.core.mvc" displayBlock="true">
-
-	<App>
-		<u:SplitContainer id="mySplitContainer" showSecondaryContent="true" secondaryContentWidth="50px">
-			<u:secondaryContent>
-				<Page>
-					<customHeader>
-						<Bar>
-							<contentMiddle>
-								<core:Icon src="sap-icon://sap-logo-shape" tooltip="Start" color="#000000" class="sapUiSmallMargin" />
-							</contentMiddle>
-
-						</Bar>
-					</customHeader>
-					<List>
-						<CustomListItem >
-							<core:Icon src="sap-icon://busy" tooltip="Start" color="#000000" class="sapUiSmallMargin" />
-						</CustomListItem>
-						<CustomListItem >
-							<core:Icon src="sap-icon://excel-attachment" color="#031E48" class="sapUiSmallMargin" />
-						</CustomListItem>
-						<CustomListItem >
-							<core:Icon src="sap-icon://survey" color="#E69A17" class="sapUiSmallMargin" />
-						</CustomListItem>
-						<CustomListItem >
-							<core:Icon src="sap-icon://microphone" color="#031E48" class="sapUiSmallMargin" />
-						</CustomListItem>
-						<CustomListItem >
-							<core:Icon src="sap-icon://filter" color="#E69A17" class="sapUiSmallMargin"/>
-						</CustomListItem>
-					</List>
-					<footer>
-						<Toolbar>
-							<Label textAlign="Center" text="v0.07"/>
-						</Toolbar>
-					</footer>
-				</Page>
-			</u:secondaryContent>
-			<u:content>
-				<Page>
-					<customHeader>
-						<Bar>
-							<contentLeft>
-								<Button icon="sap-icon://filter-analytics" press="handleToggleSecondaryContent"></Button>
-							</contentLeft>
-							<contentMiddle>
-								<Title text="{i18n>homePageTitle}"></Title>
-							</contentMiddle>
-							<contentRight>
-								<Button icon="sap-icon://excel-attachment" press="onUploadDialogOpen"></Button>
-							</contentRight>
-						</Bar>
-					</customHeader>
-					<content>
-						<Toolbar>
-							<SearchField id="idSearchField" placeholder="Search" showRefreshButton="true" liveChange=".onSearch" width="100%"/>
-							<ToggleButton icon="sap-icon://microphone" pressed="false" press="onVoiceRecog"/>
-						</Toolbar>
-						<Table id="idDataTable" autoPopinMode="true" inset="false" items="{ path: '/Data', sorter: { path: 'Questions' } }">
-							<columns>
-								<Column width="12em">
-									<Text text="Question"/>
-								</Column>
-								<Column hAlign="End" demandPopin="true">
-									<Text text="Answer"/>
-								</Column>
-							</columns>
-							<items>
-								<ColumnListItem>
-									<cells>
-										<Text text="{SupplierName}"/>
-										<Text text="{Width} x {Depth} x {Height} {DimUnit}"/>
-									</cells>
-								</ColumnListItem>
-							</items>
-						</Table>
-					</content>
-					<footer>
-						<Toolbar height="40%">
-							<form:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="true">
-								<Label text="Console Log"/>
-								<TextArea id="idStatusLog" value="" editable="false" rows="4" width="100%"/>
-							</form:SimpleForm>
-						</Toolbar>
-					</footer>
-				</Page>
-			</u:content>
-		</u:SplitContainer>
-	</App>
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:tnt="sap.tnt" displayBlock="true" height="100%">
+	<tnt:ToolPage id="toolPage">
+		<tnt:header>
+			<tnt:ToolHeader>
+				<Button icon="sap-icon://menu2" type="Transparent" press=".onSideNavButtonPress">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button>
+				<HBox width="100%" alignContent="Center" justifyContent="Center">
+					<Title text="Sem Dude">
+					</Title>
+				</HBox>
+				<Button icon="sap-icon://synchronize" type="Transparent" press="onHardReload">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button>
+			</tnt:ToolHeader>
+		</tnt:header>
+		<tnt:sideContent>
+			<tnt:SideNavigation id="sideNavigation" itemSelect=".onItemSelect" selectedKey="idPageWorkspace">
+				<tnt:NavigationList>
+					<tnt:NavigationListItem text="Workspace" key="idPageWorkspace" icon="sap-icon://overlay"/>
+					<tnt:NavigationListItem text="Upload Source" key="idPageUpload" icon="sap-icon://excel-attachment" />
+					<tnt:NavigationListItem text="How to use" key="idPageHowTo" icon="sap-icon://sys-help-2" />
+					<tnt:NavigationListItem text="Settings" key="idPageSettings" icon="sap-icon://developer-settings" />
+					<tnt:NavigationListItem text="About" key="idPageAbout" icon="sap-icon://message-information" />
+				</tnt:NavigationList>
+			</tnt:SideNavigation>
+		</tnt:sideContent>
+		<tnt:mainContents>
+			<NavContainer id="pageContainer" initialPage="idPageWorkspace">
+				<pages>
+					<Page showHeader="false" id="idPageWorkspace" title="Workspace" titleAlignment="Center">
+						<content>
+							<Toolbar>
+								<SearchField id="idSearchField" placeholder="Search" showRefreshButton="true" liveChange=".onSearch" width="100%"/>
+								<ToggleButton icon="sap-icon://microphone" pressed="false" press="onVoiceRecog"/>
+							</Toolbar>
+							<Table id="idDataTable" autoPopinMode="true" inset="false" items="{ path: '/Data', sorter: { path: 'Questions' } }">
+								<columns>
+									<Column width="12em">
+										<Text text="Question"/>
+									</Column>
+									<Column hAlign="End" demandPopin="true">
+										<Text text="Answer"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{SupplierName}"/>
+											<Text text="{Width} x {Depth} x {Height} {DimUnit}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</content>
+						<footer>
+							<Toolbar height="40%">
+								<form:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="true">
+									<Label text="Console Log"/>
+									<TextArea id="idStatusLog" value="" editable="false" rows="4" width="100%"/>
+								</form:SimpleForm>
+							</Toolbar>
+						</footer>
+					</Page>
+					<Page showHeader="false" id="idPageUpload" title="Upload" titleAlignment="Center">
+						<content>
+							<Text text="Upload"/>
+						</content>
+					</Page>
+					<Page showHeader="false" id="idPageHowTo" title="How To Use" titleAlignment="Center">
+						<content>
+							<Text text="How To Use"/>
+						</content>
+					</Page>
+					<Page showHeader="false" id="idPageSettings" title="Settings" titleAlignment="Center">
+						<content>
+							<Text text="Settings"/>
+						</content>
+					</Page>
+					<Page showHeader="false" id="idPageAbout" title="About" titleAlignment="Center">
+						<content>
+							<Text text="About"/>
+						</content>
+					</Page>
+				</pages>
+			</NavContainer>
+		</tnt:mainContents>
+	</tnt:ToolPage>
 </mvc:View>
